@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Result</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        h1 { font-size: 25px; color: black; }
+        h2 { font-size: 20px; color: red; }
+        .question-container { width: 60%; margin: 0 auto; text-align: left; padding: 10px; }
+        .question { font-size: 18px; font-weight: bold; }
+        .answer { font-size: 16px; color: blue; }
+        .correct { font-size: 16px; color: green; font-weight: bold; }
+        .wrong { font-size: 16px; color: red; font-weight: bold; }
+        .result-box { font-size: 20px; font-weight: bold; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Thank You, {{ name }}</h1>
+    <div class="result-box">
+        Your Result: {{ score }} / {{ total }} <br>
+        <h2>Percentage: {{ percentage }}%</h2>
+    </div>
+
+    <h2>Detailed Review</h2>
+    <div class="question-container">
+        {% for i in range(questions|length) %}
+            <div class="question">Q{{ i+1 }}: {{ questions[i]["question"] }}</div>
+            <div class="answer">Your Answer: 
+                {% if chosen_answers[i] == questions[i]["correct"] %}
+                    <span class="correct">{{ chosen_answers[i] }}</span>
+                {% else %}
+                    <span class="wrong">{{ chosen_answers[i] if chosen_answers[i] else "None" }}</span>
+                {% endif %}
+            </div>
+            <div class="answer">Correct Answer: <span class="correct">{{ questions[i]["correct"] }}</span></div>
+            <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>
